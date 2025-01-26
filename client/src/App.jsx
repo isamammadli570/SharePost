@@ -1,11 +1,20 @@
-function App() {
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Home from "./pages/Home"
+import Auth from "./pages/Auth"
+import { ToastContainer} from 'react-toastify';
+/* import 'react-toastify/dist/ReactToastify.css' */
 
+function App() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/auth" element={<Auth />} />
+        </Routes>
+      </BrowserRouter>
+      <ToastContainer />
+    </>
   )
 }
 
