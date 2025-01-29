@@ -2,35 +2,37 @@ const AuthSchema = require("../models/auth.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
-const register = async (res, req) => {
+const register = async (req, res) => {
+  console.log("register basladi");
   try {
     const { username, email, password } = req.body;
 
-    const user = await AuthSchema.findOne(email);
+    const user = await AuthSchema.findOne({ email });
 
     if (user) {
-      return res.status(500).json({ message: "Bele bir istifadeci vardir" });
+      return res.status(409).json({ message: "Belə bir istifadəçi vardır" });
     } // eger o email ile qeydiyyatdan kecibse yene kece bilmez
 
     if (password.length < 6) {
       return res
-        .status(500)
-        .json({ message: "Sifre 6 karakterden boyuk olmalidir" });
+        .status(400)
+        .json({ message: "Şifrə 6 simvoldan böyük olmalıdır" });
     } // 6dan asagidirsa olmaz
 
     const hashedPassword = await bcrypt.hash(password, 12); // hash etdik
 
     if (!isEmail(email)) {
-      return res
-        .status(500)
-        .json({ message: "Email formati xaricinde isareler girdiniz!" });
-    } // email yazanda ferqli isareler olmaz
+      return res.status(400).json({ message: "Email formatı düzgün deyil!" });
+    }
+
+    // email yazanda ferqli isareler olmaz
 
     const newUser = await AuthSchema.create({
       username,
       email,
-      hashedPassword,
-    }); // ve bizim yeni userimiz hazirdir
+      password: hashedPassword,
+    });
+    // ve bizim yeni userimiz hazirdir
 
     const token = jwt.sign({ id: newUser._id }, "SECRET_KEY", {
       expiresIn: "1h",
@@ -46,11 +48,11 @@ const register = async (res, req) => {
   }
 };
 
-const login = async (res, req) => {
+const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await AuthSchema.findOne(email);
+    const user = await AuthSchema.findOne({ email });
 
     if (!user) {
       return res.status(500).json({ message: "Bele bir istifadeci yoxdur" });
@@ -77,7 +79,7 @@ const login = async (res, req) => {
 
 // bu hemin email isareleri funksiyasidir
 function isEmail(emailAdress) {
-  let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   if (emailAdress.match(regex)) return true;
   else return false;

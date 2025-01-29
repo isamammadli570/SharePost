@@ -5,9 +5,8 @@ import authReducer from "./reducers/auth";
 
 const initialState = {};
 
-
 const reducers = combineReducers({
-  auth: authReducer
+  auth: authReducer,
 });
 
 const store = createStore(

@@ -1,13 +1,24 @@
 import { useState } from "react"
+import { loginAction, registerAction } from "../redux/actions/auth"
+import { useDispatch } from "react-redux"
 
 function Auth() {
     const [signUp, setSignUp] = useState(true)
     const [authData, setAuthData] = useState({ username: "", email: "", password: "" })
+    const dispatch = useDispatch()
 
     function onChangeFunc(e) {
         setAuthData({ ...authData, [e.target.name]: e.target.value })
-        console.log("authData", authData)
     }
+
+    function authFunc() {
+        if (signUp) {
+            dispatch(registerAction(authData))
+        } else {
+            dispatch(loginAction(authData))
+        }
+    }
+    console.log("authData", authData)
 
     return (
         <div className="w-full h-screen bg-gray-100 flex items-center justify-center fixed top-0 right-0 bottom-0">
@@ -18,7 +29,7 @@ function Auth() {
                     <input value={authData.email} name="email" onChange={onChangeFunc} type="text" placeholder="Email" className="input-style" />
                     <input value={authData.password} name="password" onChange={onChangeFunc} type="text" placeholder="Şifrə" className="input-style" />
                 </div>
-                <div className="cursor-pointer text-blue-400 text-sm">
+                <div className="cursor-pointer text-red-400 text-sm">
                     {
                         signUp ?
                             <span onClick={() => setSignUp(false)}>Daha əvvəl giriş etmisiniz mi?</span>
@@ -27,7 +38,7 @@ function Auth() {
                     }
 
                 </div>
-                <div className="cursor-pointer w-full p-2 text-center bg-indigo-600 text-white rounded-md">{signUp ? "Qeydiyyatdan keç" : "Giriş et"}</div>
+                <div onClick={authFunc} className="cursor-pointer w-full p-2 mt-2 text-center bg-indigo-600 text-white rounded-md">{signUp ? "Qeydiyyatdan keç" : "Giriş et"}</div>
             </div>
         </div>
     )
