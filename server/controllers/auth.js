@@ -9,23 +9,25 @@ const register = async (req, res) => {
 
     const user = await AuthSchema.findOne({ email });
 
+    if (!username || !email || !password) {
+      return res.status(400).json({ message: "Bütün sahələri doldurun!" });
+    }
+
     if (user) {
-      return res.status(409).json({ message: "Belə bir istifadəçi vardır" });
+      return res.status(409).json({ message: "Bele bir istifadeci vardir" });
     } // eger o email ile qeydiyyatdan kecibse yene kece bilmez
 
     if (password.length < 6) {
       return res
         .status(400)
-        .json({ message: "Şifrə 6 simvoldan böyük olmalıdır" });
+        .json({ message: "Sifre 6 karakterden boyuk olmalidir" });
     } // 6dan asagidirsa olmaz
 
     const hashedPassword = await bcrypt.hash(password, 12); // hash etdik
 
     if (!isEmail(email)) {
       return res.status(400).json({ message: "Email formatı düzgün deyil!" });
-    }
-
-    // email yazanda ferqli isareler olmaz
+    } // email yazanda ferqli isareler olmaz
 
     const newUser = await AuthSchema.create({
       username,
@@ -37,6 +39,7 @@ const register = async (req, res) => {
     const token = jwt.sign({ id: newUser._id }, "SECRET_KEY", {
       expiresIn: "1h",
     }); // token yaratdiq
+    console.log(token);
 
     res.status(201).json({
       status: "OK",
@@ -53,6 +56,10 @@ const login = async (req, res) => {
     const { email, password } = req.body;
 
     const user = await AuthSchema.findOne({ email });
+
+    if (!email || !password) {
+      return res.status(400).json({ message: "Bütün sahələri doldurun!" });
+    }
 
     if (!user) {
       return res.status(500).json({ message: "Bele bir istifadeci yoxdur" });
