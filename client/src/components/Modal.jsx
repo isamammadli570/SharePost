@@ -41,7 +41,7 @@ function Modal() {
           <input value={postData.title} onChange={onChangeFunc} name='title' className='input-style' type="text" placeholder='Başlıq' />
           <input value={postData.description} onChange={onChangeFunc} name='description' className='input-style' type="text" placeholder='Təsvir' />
         </div>
-        <div onClick={postCreate} className='w-full p-2 text-center bg-indigo-600 text-white cursor-pointer hover:bg-indigo-800'>
+        <div onClick={postCreate} className='w-full p-2 text-center bg-emerald-600 text-white cursor-pointer hover:bg-emerald-800'>
         {modal?.updateId ? "Yenilə" : "Paylaş"}
         </div>
       </div>

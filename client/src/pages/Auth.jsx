@@ -48,7 +48,7 @@ function Auth() {
                     }
 
                 </div>
-                <div onClick={authFunc} className="cursor-pointer w-full p-2 mt-2 text-center bg-indigo-600 text-white rounded-md">{signUp ? "Qeydiyyatdan keç" : "Giriş et"}</div>
+                <div onClick={authFunc} className="cursor-pointer w-full p-2 mt-2 text-center bg-emerald-600 text-white rounded-md">{signUp ? "Qeydiyyatdan keç" : "Giriş et"}</div>
             </div>
         </div>
     )
