@@ -5,13 +5,22 @@ import { useDispatch } from "react-redux"
 function Auth() {
     const [signUp, setSignUp] = useState(true)
     const [authData, setAuthData] = useState({ username: "", email: "", password: "" })
+    const [confirmPassword, setConfirmPassword] = useState("")
+
     const dispatch = useDispatch()
 
     function onChangeFunc(e) {
         setAuthData({ ...authData, [e.target.name]: e.target.value })
     }
 
+
     function authFunc() {
+        if (signUp) {
+            if (authData.password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return;
+            }
+        }
         if (signUp) {
             dispatch(registerAction(authData))
         } else {
@@ -28,6 +37,7 @@ function Auth() {
                     {signUp && <input value={authData.username} name="username" onChange={onChangeFunc} type="text" placeholder="Ad" className="input-style" />}
                     <input value={authData.email} name="email" onChange={onChangeFunc} type="text" placeholder="Email" className="input-style" />
                     <input value={authData.password} name="password" onChange={onChangeFunc} type="text" placeholder="Şifrə" className="input-style" />
+                    {signUp && <input value={confirmPassword} name="password" onChange={(e) => setConfirmPassword(e.target.value)} type="text" placeholder="Şifrə" className="input-style" />}
                 </div>
                 <div className="cursor-pointer text-red-400 text-sm">
                     {
