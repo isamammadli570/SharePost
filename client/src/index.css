@@ -2,6 +2,6 @@
 
 @layer components {
   .input-style {
-    @apply border p-2 rounded-md outline-none;
+    @apply  p-3 w-full shadow-purple-950 shadow-sm rounded-3xl outline-none;
   }
 }

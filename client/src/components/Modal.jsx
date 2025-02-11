@@ -30,7 +30,7 @@ function Modal() {
 
   return (
     <div className='w-full h-screen bg-black/50 backdrop-blur-sm fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center '>
-      <div className='bg-white w-1/3 p-2 rounded-md'>
+      <div className='bg-white w-1/3 p-3 rounded-2xl'>
         <div className='flex justify-between items-center'>
 
           <h1 className='font-bold text-2xl'>{modal?.updateId ? "Post Yenilə" : "Post Paylaş"}</h1>
@@ -41,8 +41,8 @@ function Modal() {
           <input value={postData.title} onChange={onChangeFunc} name='title' className='input-style' type="text" placeholder='Başlıq' />
           <input value={postData.description} onChange={onChangeFunc} name='description' className='input-style' type="text" placeholder='Təsvir' />
         </div>
-        <div onClick={postCreate} className='w-full p-2 text-center bg-emerald-600 text-white cursor-pointer hover:bg-emerald-800'>
-        {modal?.updateId ? "Yenilə" : "Paylaş"}
+        <div onClick={postCreate} className='cursor-pointer w-full p-3 text-center bg-gradient-to-b from-purple-600 to-blue-700 shadow-purple-950 shadow-sm text-white rounded-3xl'>
+          {modal?.updateId ? "Yenilə" : "Paylaş"}
         </div>
       </div>
     </div>

@@ -23,7 +23,7 @@ function HomeCard({ post }) {
 
 
     return (
-        <div className="relative w-3/5 mt-5 border p-5 rounded-md bg-zinc-50 mx-5">
+        <div className="relative w-xl h-full mt-5 shadow-xl p-5 rounded-3xl bg-zinc-50 mx-5">
             <h2 className="font-bold text-xl">{post?.title}</h2>
             <div className="flex justify-between">
                 <div>
@@ -34,8 +34,8 @@ function HomeCard({ post }) {
                     </div>
                 </div>
                 <div className="flex items-center gap-2">
-                    <GrUpdate className="text-white bg-yellow-500 hover:bg-yellow-600 duration-200 rounded disabled:opacity-50 p-2 cursor-pointer" onClick={() => updatePost(post._id)} size={30} />
-                    <FaTrash className="text-white bg-emerald-700 hover:bg-emerald-500 duration-200 rounded disabled:opacity-50 p-2 cursor-pointer" onClick={() => deletePost(post._id)} size={30} />
+                    <GrUpdate className="text-white bg-gradient-to-t from-yellow-600 to-red-400 duration-200 rounded disabled:opacity-50 p-2 cursor-pointer" onClick={() => updatePost(post._id)} size={30} />
+                    <FaTrash className="text-white bg-gradient-to-b from-purple-600 to-blue-700 duration-200 rounded disabled:opacity-50 p-2 cursor-pointer" onClick={() => deletePost(post._id)} size={30} />
                 </div>
             </div>
         </div>

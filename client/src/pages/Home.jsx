@@ -13,12 +13,12 @@ function Home({ filteredPosts }) {
   }, [dispatch]);
 
   return (
-    <div className="">
+    <div className="h-screen">
       <div className="flex flex-wrap justify-center items-center m-5">
         {filteredPosts?.length > 0 ? (
           filteredPosts?.map((post, i) => <HomeCard key={i} post={post} />)
         ) : (
-          <p className="text-gray-500">Axtarışa uyğun nəticə tapılmadı.</p>
+          <p className="text-purple-500">Axtarışa uyğun nəticə tapılmadı.</p>
         )}
       </div>
       {/* <Footer /> */}

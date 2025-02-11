@@ -23,8 +23,8 @@ function Navbar({ onSearch }) {
   }
 
   return (
-    <div className='bg-emerald-700 flex justify-center'>
-      <div className="flex items-center justify-between mx-20 h-20 w-3/5 px-5">
+    <div className='bg-gradient-to-l from-purple-400 to-indigo-600 flex justify-center'>
+      <div className="flex items-center justify-between h-20 w-3/5 ">
 
         <div className='text-white font-bold text-2xl cursor-pointer'>
           Post Paylaş
@@ -34,9 +34,9 @@ function Navbar({ onSearch }) {
             onChange={handleSearch}
             type="text"
             placeholder='Axtar'
-            className='p-2 outline-none rounded-md bg-white' />
-          <div onClick={openModal} className='w-36 border hover:bg-emerald-400 p-2 rounded-md text-center text-white cursor-pointer transition-all duration-200'>Post yarad</div>
-          <BiLogOut onClick={logOutFunc} size={25} className="text-white cursor-pointer" />
+            className='input-style bg-white p-2' />
+          <div onClick={openModal} className='w-36 bg-white hover:bg-white hover:text-purple-500 p-2 rounded-2xl font-semibold text-center cursor-pointer transition-all duration-200'>Post yarad</div>
+          <BiLogOut onClick={logOutFunc} size={40} className="text-white cursor-pointer" />
         </div>
       </div>
     </div>

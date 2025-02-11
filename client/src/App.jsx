@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import useToken from "./hooks/useToken";
 import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
+import Footer from "./components/Footer"
 /* import 'react-toastify/dist/ReactToastify.css' */
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
           <Route path="/" element={!token?.token ? <Link to={'/auth'} /> : <Home filteredPosts={filteredPosts} />} />
           <Route path="/auth" element={<Auth />} />
         </Routes>
+        {token?.token && <Footer />}
       </BrowserRouter>
       <ToastContainer />
     </>
