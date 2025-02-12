@@ -2,6 +2,7 @@ import { useState } from "react"
 import { loginAction, registerAction } from "../redux/actions/auth"
 import { useDispatch } from "react-redux"
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 function Auth() {
     const [signUp, setSignUp] = useState(true)
@@ -22,9 +23,19 @@ function Auth() {
     }
     console.log("authData", authData)
 
+    const variants = {
+        hidden: { opacity: 0, x: signUp ? 50 : -50 },
+        visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeInOut" } },
+    };
+
     return (
         <div className="w-full h-full bg-gray-100 flex items-center justify-center fixed top-0 right-0 bottom-0 left-0 z-50">
-            <div className="flex lg:w-5xl md:w-4xl w-3xl h-[600px]">
+            <motion.div
+                key={signUp ? "register" : "login"}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                variants={variants} className="flex lg:w-5xl md:w-4xl w-3xl h-[600px]">
                 <div className="w-3/5 bg-white p-32 items-center shadow-2xl justify-center rounded-l-3xl">
                     <h1 className="text-3xl text-center font-bold">{signUp ? "Qeydiyyat" : "Giriş"}</h1>
                     <div className="flex flex-col space-y-3 my-5">
@@ -35,15 +46,15 @@ function Auth() {
                                 value={authData.password}
                                 name="password"
                                 onChange={onChangeFunc}
-                                type={showPassword ? "text" : "password"}  // Şifrəni göstərmək üçün type dəyişdir
+                                type={showPassword ? "text" : "password"}
                                 placeholder="Şifrə"
                                 className="input-style"
                             />
                             <div
-                                onClick={() => setShowPassword(!showPassword)}  // Şifrəni göstər/gizlət
+                                onClick={() => setShowPassword(!showPassword)}
                                 className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
                             >
-                                {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}  {/* Şifrəni göstərmək üçün ikon */}
+                                {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
                             </div>
                         </div>
                     </div>
@@ -66,7 +77,7 @@ function Auth() {
                     <h1 className="text-3xl font-semibold">{signUp ? "Gəlin, başlayaq!" : "Yenidən xoş gəldiniz!"}</h1>
                     <p className="text-center p-1">{signUp ? "Sadəcə bir neçə saniyə ərzində hesab yaradın və bizə qoşulun!" : "Hesabınıza daxil olun və unikal təcrübənin bir hissəsi olun! Sizi özəlləşdirilmiş imkanlar, intuitiv interfeys və rahat istifadəçi təcrübəsi gözləyir. "}</p>
                 </div>
-            </div>
+            </motion.div>
         </div>
     )
 }
